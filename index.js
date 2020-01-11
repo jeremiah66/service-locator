@@ -96,7 +96,7 @@ window.addEventListener('load',async () =>{
 
 
  renderService();
-
+location.reload((true));
 $('#loading').hide();
 });
 
