@@ -114,5 +114,6 @@ await contractCall('storeService',[name, sLocation,mapUrl], 0);
      renderService();
 
 $('#loading').hide();
+location.reload()
 });
 
