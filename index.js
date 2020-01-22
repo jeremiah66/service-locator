@@ -110,7 +110,9 @@ window.addEventListener('load',async () =>{
             sName            : s.sName,
             sMapUrl          : s.mapUrl,
             amount           : s.amount,
-            active           : s.active
+            active           : s.active,
+            id               : s.index
+
           
         })
 
