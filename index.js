@@ -149,7 +149,7 @@ $('#service-lists').on('click','.donateBtn', async function(e){
     const amount = $('input[id='+service_id+']').val();
     
   console.log("amount "+amount+ "-"+service_id)
-  await contractCall('donateService',[service_id], amount);
+  await contractCall('donateForService',[service_id], amount);
   
   
   location.reload((true));
