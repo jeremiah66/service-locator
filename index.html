@@ -144,7 +144,7 @@
             <iframe src="{{sMapUrl}}" width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
           </p>
           <p class="card-text">
-            Total : {{amont}} AE
+            Total : {{amount}} AE
           </p>
           <div class="card-footer">
             <div class="input-group mb-3">
@@ -152,10 +152,10 @@
                <div class="input-group-append">
               <button type="button" class="input-group-text">Donate</button>
               {{#active}}
-               <button type="reset" id={{id}} class="btn btn-success activateBtn">Activate</button>
+                <button type="reset" id={{id}} class="btn btn-danger deactivateBtn">Deactivate</button>
                {{/active}}
                {{^active}}
-                <button type="reset" id={{id}} class="btn btn-danger deactivateBtn">Deactivate</button>
+                <button type="reset" id={{id}} class="btn btn-success activateBtn">Activate</button>
                 {{/active}}
       </div>
     </div>
