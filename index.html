@@ -144,9 +144,11 @@
           </p>
           <div class="card-footer">
             <div class="input-group mb-3">
-               <input type="number" class="form-control" placeholder="AE Token" id="amount" name="amount">
+               <input type="number" class="form-control" placeholder="AE Token" id={{id}} name="amount">
                <div class="input-group-append">
               <button type="button" class="input-group-text">Donate</button>
+               <button type="reset" id={{id}} class="btn btn-success activateBtn">Activate</button>
+                <button type="reset" id={{id}} class="btn btn-danger deactivateBtn">Deactivate</button>
       </div>
     </div>
           </div>

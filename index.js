@@ -139,3 +139,45 @@ await contractCall('storeService',[name, sLocation,mapUrl], 0);
 $('#loading').hide();
 });
 
+
+$('#service-lists').on('click','.donateBtn', async function(e){
+    $('#loading').show();
+    
+    const service_id = e.target.id;
+    const amount = $('input[id='+service_id+']').val();
+    
+  
+  await contractCall('donateService',[service_id], amount);
+  
+  
+  location.reload((true));
+  renderService();
+  $('#loading').hide();
+  });
+  
+  
+  $('#service-lists').on('click','.activateBtn', async function(e){
+    $('#loading').show();
+    
+    const service_id = e.target.id;
+    
+  await contractCall('activateService',[service_id], 0);
+  
+  location.reload((true));
+  renderService();
+  $('#loading').hide();
+  });
+  
+  $('#service-lists').on('click','.deactivateBtn', async function(e){
+    $('#loading').show();
+    
+    const service_id = e.target.id;
+    
+  
+  await contractCall('deactivateService',[service_id], 0);
+
+  location.reload((true));
+  renderService();
+  $('#loading').hide();
+  });
+
