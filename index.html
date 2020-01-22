@@ -43,20 +43,20 @@
                   <li class="nav-item active">
                       <span class="nav-link">Service Locator <span class="sr-only">(current)</span></span>
                   </li>
-                  <!-- <li class="nav-item">
+                  <li class="nav-item">
                       <a class="nav-link" href="#" data-toggle="modal" data-target="#rModal"><i class="fa fa-plus-circle" aria-hidden="true"></i>REGISTER NEW SERVICE LOCATOR</a>
-                  </li> -->
+                  </li>
                  
               </ul>
-              <!-- <form class="form-inline my-2 my-lg-0">
+              <form class="form-inline my-2 my-lg-0">
                   <input class="form-control mr-sm-2" type="text" placeholder="Search">
                   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form> -->
+              </form>
           </div>
       </nav>
       <div id="loading" style="text-align: center;">
           <img src="resources/images/loading.svg" alt="">
-          <div><b>Please Wait...</b></div>
+          <div><b>Please Wai...</b></div>
       </div>
       <div class="row">
 
@@ -114,7 +114,7 @@
                   <div class="form-group">
                   
                   </div>
-                </div>s
+                </div>
                 
             </div>
           </div>
@@ -142,6 +142,21 @@
             <p class="card-text">
             <iframe src="{{sMapUrl}}" width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
           </p>
+          <div class="card-footer">
+                <div class="row">
+                <div class="col-sm-8">
+                 <div class="form-group">
+                   <label for="">Donate:</label>
+                   <input type="text" name="amount" id={{id}}  class="form-control" placeholder="AE Amount" aria-describedby="amount">
+                </div>
+               </div>
+               <div class="col-sm-4">
+                 <div class="form-group">
+                  <button type="button"  class="btn btn-primary float-right donateBtn m-2 p-2" id={{id}}>Donate</button>
+                </div>
+             </div>
+         </div>
+          </div>
         </div>
     </div>
       {{/serviceArray}}

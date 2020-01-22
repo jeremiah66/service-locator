@@ -1,12 +1,14 @@
 var contractSource = `
-contract ServiceLocatorContract=
+payable contract ServiceLocatorContract =
 
   record service = {
          index               : int,
          sAddress            : address,
          sName               : string,
          sLocation           : string,
-         mapUrl              : string
+         mapUrl              : string,
+         active              : bool,
+         amount              : int
          
          }
 
@@ -16,9 +18,9 @@ contract ServiceLocatorContract=
           }
   
   entrypoint init() = {
-        services = {},
-        sLength = 0 
-        }
+         services = {},
+         sLength = 0 
+         }
   
   stateful entrypoint storeService(name : string, loc :string, url :string) =
         let service ={
@@ -26,7 +28,9 @@ contract ServiceLocatorContract=
             sAddress = Call.caller,
             sName       = name,
             sLocation   = loc,
-            mapUrl      = url
+            mapUrl      = url,
+            amount      = 0,
+            active      = true
            
             }
         
@@ -35,13 +39,30 @@ contract ServiceLocatorContract=
         put( state { services[index] = service, sLength = index})
         
   entrypoint getService(index :int ) :service =
-    state.services[index]
+         state.services[index]
+            
+  payable stateful entrypoint donateForService(index : int) =
+          let service = getService(index)
+          Chain.spend(service.sAddress,Call.value)
+          let amount =service.amount+Call.value
+          let updateService =state.services{[index].amount = amount }
+          put(state {services = updateService})
+                   
+  stateful entrypoint activateService(index : int) =
+         let service          =  getService(index)
+         let update    =  state.services{[index].active = true }
+         put(state {services  =  update })
+         
     
+  stateful entrypoint deactivateService(index : int) =
+         let service          =  getService(index)
+         let update    =  state.services{[index].active = false }
+         put(state {services  =  update})
     
   entrypoint sLength() : int =
-        state.sLength       
+         state.sLength   
 `;
-var contractAddress= "ct_pixUugVUCiQPJ2fSSGC2tprjGo7xBid9tkriPztfSjjW5CyWr";
+var contractAddress= "ct_yF3H7R57JufeyVfZuBMGwD9eovBtWGctNjpuwyZWjub9Z7NRM";
 
 var client =null;
 
@@ -88,6 +109,8 @@ window.addEventListener('load',async () =>{
             sOwner           : s.sAddress,
             sName            : s.sName,
             sMapUrl          : s.mapUrl,
+            amount           : s.amount,
+            active           : s.active
           
         })
 
@@ -96,7 +119,7 @@ window.addEventListener('load',async () =>{
 
 
  renderService();
-//location.reload((true));
+
 $('#loading').hide();
 });
 
@@ -114,6 +137,5 @@ await contractCall('storeService',[name, sLocation,mapUrl], 0);
      renderService();
 
 $('#loading').hide();
-location.reload()
 });
 
