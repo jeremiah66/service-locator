@@ -149,7 +149,7 @@ window.addEventListener('load',async () =>{
         })
 
         const reviews =await callStatic('getServiceReview',[i])
-        console.log(reviewArray.length)
+        console.log(reviews.length)
         for (let j = 0; j <= reviews.length; j++) {
            reviewArray.push({
                 index     : reviews[j].index,
