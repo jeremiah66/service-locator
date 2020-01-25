@@ -232,7 +232,7 @@ $('#service-lists').on('click','.donateBtn', async function(e){
     $('#loading').show();
     const service_id = e.target.id;
     const comment = $('input[id='+service_id+']').val();
-
+    console.log("comm= "+comment)
    await contractCall('addReview',[service_id, comment], comment);
      renderService();
 
