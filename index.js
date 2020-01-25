@@ -104,11 +104,12 @@ var serviceLength =0;
 async function renderService() {
     var template=$('#template').html();
     Mustache.parse(template);
-    var render = Mustache.render(template, {serviceArray});
+    var render = Mustache.render(template, {serviceArray,reviewArray});
     $('#service-lists').html(render);
-    partTotal = await callStatic('sLength', [])
-    $('#total').html(serviceLength);
+   
 }
+
+
 
 async function callStatic(func,args){
     const contract = await client.getContractInstance(contractSource, {contractAddress});
