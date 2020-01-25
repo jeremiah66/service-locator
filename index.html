@@ -43,15 +43,10 @@
                   <li class="nav-item active">
                       <span class="nav-link">Service Locator <span class="sr-only">(current)</span></span>
                   </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#" data-toggle="modal" data-target="#rModal"><i class="fa fa-plus-circle" aria-hidden="true"></i>REGISTER NEW SERVICE LOCATOR</a>
-                  </li>
+                
                  
               </ul>
-              <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
+         
           </div>
       </nav>
       <div id="loading" style="text-align: center;">
@@ -159,6 +154,23 @@
                 {{/active}}
       </div>
     </div>
+          </div>
+
+
+          <div class="row mt-2">
+             <dic class="card">
+             <div class="card-header">
+             List of user reviews
+            </div>
+            <div class="card-body">
+            <ul>
+               {{#reviewArray}}
+                <li>{{review_description}}</li>
+               {{/reviewArray}}
+               </ul>
+            </div>
+             </div>
+          
           </div>
         </div>
     </div>
