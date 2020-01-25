@@ -1,28 +1,38 @@
 var contractSource = `
 payable contract ServiceLocatorContract =
 
-  record service = {
+    record service = {
          index               : int,
          sAddress            : address,
          sName               : string,
          sLocation           : string,
          mapUrl              : string,
          active              : bool,
-         amount              : int
+         amount              : int,
+         review              : list(user_review)
          
          }
+    record user_review ={
+           index : int,
+           review_owner : address,
+           review_description : string
+        }
 
-  record state ={
+    record state ={
           services : map(int, service),
-          sLength : int
+          user_reviews : map(int, user_review),
+          sLength : int,
+          rLength :int
           }
   
-  entrypoint init() = {
+    entrypoint init() = {
          services = {},
-         sLength = 0 
+         user_reviews = {},
+         sLength = 0,
+         rLength = 0
          }
   
-  stateful entrypoint storeService(name : string, loc :string, url :string) =
+    stateful entrypoint storeService(name : string, loc :string, url :string) =
         let service ={
             index       = sLength() +1,
             sAddress = Call.caller,
@@ -30,43 +40,65 @@ payable contract ServiceLocatorContract =
             sLocation   = loc,
             mapUrl      = url,
             amount      = 0,
-            active      = true
-           
+            active      = true,
+            review      = [] 
             }
         
         let index = sLength() +1
         
         put( state { services[index] = service, sLength = index})
         
-  entrypoint getService(index :int ) :service =
+    entrypoint getService(index :int ) :service =
          state.services[index]
             
-  payable stateful entrypoint donateForService(index : int) =
+    payable stateful entrypoint donateForService(index : int) =
           let service = getService(index)
           Chain.spend(service.sAddress,Call.value)
           let amount =service.amount+Call.value
           let updateService =state.services{[index].amount = amount }
           put(state {services = updateService})
                    
-  stateful entrypoint activateService(index : int) =
+    stateful entrypoint activateService(index : int) =
          let service          =  getService(index)
          let update    =  state.services{[index].active = true }
          put(state {services  =  update })
          
     
-  stateful entrypoint deactivateService(index : int) =
+    stateful entrypoint deactivateService(index : int) =
          let service          =  getService(index)
          let update    =  state.services{[index].active = false }
          put(state {services  =  update})
     
-  entrypoint sLength() : int =
-         state.sLength   
+    stateful entrypoint addReview(index:int, review': string) =
+         let i = rLength() + 1
+
+         let service =  getService(index)
+         let review = {
+                  index = i,
+                  review_owner =Call.caller,
+                  review_description =review'
+                  }  
+
+         let inter_review =state.services{[index].review = review::state.services[index].review}
+         put(state{services = inter_review, rLength = i})
+          
+    entrypoint getServiceReview(service_id: int):list(user_review) =
+        let service =  getService(service_id)
+        state.services[service_id].review
+
+
+    entrypoint sLength() : int =
+         state.sLength  
+
+    entrypoint rLength() : int =
+         state.rLength  
 `;
-var contractAddress= "ct_yF3H7R57JufeyVfZuBMGwD9eovBtWGctNjpuwyZWjub9Z7NRM";
+var contractAddress= "ct_2g2RJhZmH2AjbagNAjmsgZLnf7jJsQ7CuFPvQ2uotNq9tnaNE3";
 
 var client =null;
 
 var serviceArray = [];
+var reviewArray = [];
 var serviceLength =0;
 
 async function renderService() {
@@ -116,9 +148,20 @@ window.addEventListener('load',async () =>{
           
         })
 
+        const reviews =await callStatic('getServiceReview',[i])
+        
+        for (let j = 1; j <= reviews.length; j++) {
+           reviewArray.push({
+                index     : reviews[j].index,
+                review_owner :reviews[j].review_owner,
+                review_description : reviews[j].review_description
+           })
+        }
+
+
         
     }
-
+   console.log(reviewArray)
 
  renderService();
 
