@@ -228,7 +228,7 @@ $('#service-lists').on('click','.donateBtn', async function(e){
   });
 
 
-  $(document).on('click','#submitReviewBtn', async function(e){
+  $(document).on('click','.submitReviewBtn', async function(e){
     $('#loading').show();
     const service_id = e.target.id;
     const comment = $('input[id='+service_id+']').val();
