@@ -231,6 +231,7 @@ $('#service-lists').on('click','.donateBtn', async function(e){
   $(document).on('click','.submitReviewBtn', async function(e){
     $('#loading').show();
     const service_id = e.target.id;
+    console.log("serv_id= "+service_id)
     const comment = $('input[id='+service_id+']').val();
     console.log("comm= "+comment)
    await contractCall('addReview',[service_id, comment], comment);
