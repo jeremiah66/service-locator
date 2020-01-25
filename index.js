@@ -227,3 +227,15 @@ $('#service-lists').on('click','.donateBtn', async function(e){
   $('#loading').hide();
   });
 
+
+  $(document).on('click','#submitReviewBtn', async function(e){
+    $('#loading').show();
+    const service_id = e.target.id;
+    const comment = $('#comment').val();
+
+   await contractCall('addReview',[service_id, comment], 0);
+     renderService();
+
+$('#loading').hide();
+});
+
