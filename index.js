@@ -93,7 +93,7 @@ payable contract ServiceLocatorContract =
     entrypoint rLength() : int =
          state.rLength  
 `;
-var contractAddress= "ct_2g2RJhZmH2AjbagNAjmsgZLnf7jJsQ7CuFPvQ2uotNq9tnaNE3";
+var contractAddress= "ct_23GXuvUPdb6ouvMBSCtaJQne5VwkYgHZyssJx7AfMkXkVpSVRP";
 
 var client =null;
 
@@ -149,7 +149,7 @@ window.addEventListener('load',async () =>{
           
         })
 
-        const reviews =await callStatic('getServiceReview',[i])
+        const reviews =await callStatic('getServiceReview',[s.index])
         console.log(reviews.length)
         for (let j = 0; j < reviews.length; j++) {
            reviewArray.push({
