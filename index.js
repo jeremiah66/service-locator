@@ -185,7 +185,8 @@ $(document).on('click','#saveBtn', async function(){
 
 
 await contractCall('storeService',[name, sLocation,mapUrl], 0);
-     renderService();
+location.reload((true));
+renderService();
 
 $('#loading').hide();
 });
