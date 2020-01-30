@@ -151,8 +151,8 @@ window.addEventListener('load',async () =>{
         })
 
         console.log(serviceArray)
-        const reviews =await callStatic('getServiceReview',[1])
-        console.log(reviews.length)
+       // const reviews =await callStatic('getServiceReview',[1])
+       // console.log(reviews.length)
         
         // console.log(reviews)
         // for (let j = 0; j < reviews.length; j++) {
@@ -167,7 +167,7 @@ window.addEventListener('load',async () =>{
 
         
     }
-   console.log(reviewArray)
+   //console.log(reviewArray)
 
  renderService();
 
