@@ -154,14 +154,14 @@ window.addEventListener('load',async () =>{
         const reviews =await callStatic('getServiceReview',[1])
         console.log(reviews.length)
         
-        console.log(reviews)
-        for (let j = 0; j < reviews.length; j++) {
-           reviewArray.push({
-                index     : reviews[j].index,
-                review_owner :reviews[j].review_owner,
-                review_description : reviews[j].review_description
-           })
-        }
+        // console.log(reviews)
+        // for (let j = 0; j < reviews.length; j++) {
+        //    reviewArray.push({
+        //         index     : reviews[j].index,
+        //         review_owner :reviews[j].review_owner,
+        //         review_description : reviews[j].review_description
+        //    })
+        // }
         
 
 
