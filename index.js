@@ -99,6 +99,7 @@ var client =null;
 
 var serviceArray = [];
 var reviewArray = [];
+var reviewArray2 = [];
 var serviceLength =0;
 
 async function renderService() {
@@ -144,11 +145,12 @@ window.addEventListener('load',async () =>{
             sMapUrl          : s.mapUrl,
             amount           : s.amount,
             active           : s.active,
-            id               : s.index
-
+            id               : s.index,
+            reviews          : s.review
           
         })
 
+        console.log("service= "+serviceArray)
         const reviews =await callStatic('getServiceReview',[1])
         console.log(reviews.length)
         console.log("r of "+i+"-" +reviews)
@@ -159,6 +161,7 @@ window.addEventListener('load',async () =>{
                 review_description : reviews[j].review_description
            })
         }
+        
 
 
         
@@ -241,4 +244,6 @@ $('#service-lists').on('click','.donateBtn', async function(e){
 
 $('#loading').hide();
 });
+
+
 
