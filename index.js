@@ -149,7 +149,7 @@ window.addEventListener('load',async () =>{
           
         })
 
-        const reviews =await callStatic('getServiceReview',[i])
+        const reviews =await callStatic('getServiceReview',[1])
         console.log(reviews.length)
         console.log("r of "+i+"-" +reviews)
         for (let j = 0; j < reviews.length; j++) {
