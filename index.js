@@ -93,7 +93,7 @@ payable contract ServiceLocatorContract =
     entrypoint rLength() : int =
          state.rLength  
 `;
-var contractAddress= "ct_23GXuvUPdb6ouvMBSCtaJQne5VwkYgHZyssJx7AfMkXkVpSVRP";
+var contractAddress= "ct_2D2zDmQKZsf4b4uJc8S7dWreMzZDJ5imFoy14V3duGA6wXUjBX";
 
 var client =null;
 
